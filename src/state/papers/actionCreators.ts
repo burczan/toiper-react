@@ -1,17 +1,16 @@
-import { PaperTypes } from '../paper';
-import { ActionTypes } from '../actionTypes';
-import { AddPaperAction, RemovePaperAction } from '../actions';
+import { AddPaperAction, RemovePaperAction } from './actions';
+import { PapersActionType, PaperTypes } from './types';
 
 export const addPaper = (id: string, type: PaperTypes): AddPaperAction => {
   return {
-    type: ActionTypes.ADD_PAPER,
+    type: PapersActionType.ADD_PAPER,
     payload: { id, type },
   };
 };
 
 export const removePaper = (id: string): RemovePaperAction => {
   return {
-    type: ActionTypes.REMOVE_PAPER,
+    type: PapersActionType.REMOVE_PAPER,
     payload: { id },
   };
 };
