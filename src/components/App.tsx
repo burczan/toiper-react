@@ -11,7 +11,7 @@ export const App: React.FC = () => {
         subtitle="Compare price of toilet paper rolls depending on amount of layers and leafs"
         color="info"
       />
-      <div className="container">
+      <div className="container" style={{ maxWidth: `${window.innerWidth / 2}px` }}>
         <AddPaperForm />
         <PapersTable />
       </div>
