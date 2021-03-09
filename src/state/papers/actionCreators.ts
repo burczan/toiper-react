@@ -19,7 +19,7 @@ export const addPaper = ({
   length,
 }: AddPaperFormControls): AddPaperAction => {
   const layerPrice = price / (layers * leafs);
-  const oneMeterPrice = price / length;
+  const oneMeterPrice = Math.round((price / length) * 100) / 100;
 
   return {
     type: PapersActionType.ADD_PAPER,
