@@ -9,8 +9,6 @@ export type AddPaperFormControls = {
   leafs: PaperProps['leafs'];
 };
 
-let nextPaperId = 0;
-
 export const addPaper = ({
   type,
   name,
@@ -23,7 +21,7 @@ export const addPaper = ({
   return {
     type: PapersActionType.ADD_PAPER,
     payload: {
-      id: (++nextPaperId).toString(),
+      id: Math.random().toString(36).substr(3, 9),
       type,
       name,
       price,
@@ -34,7 +32,7 @@ export const addPaper = ({
   };
 };
 
-export const removePaper = (id: string): RemovePaperAction => {
+export const removePaper = (id: PaperProps['id']): RemovePaperAction => {
   return {
     type: PapersActionType.REMOVE_PAPER,
     payload: { id },
