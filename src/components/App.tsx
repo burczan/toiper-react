@@ -1,17 +1,20 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { removePaper } from '../state/papers/actionCreators';
-import { useTypedSelector } from '../common/hooks/useTypedSelector';
+import { Hero } from '../common/components/Hero';
+import { AddPaperForm } from './AddPaperForm';
+import { PapersTable } from './PapersTable';
 
-export const App = (): JSX.Element => {
-  const dispatch = useDispatch();
-  const { papers } = useTypedSelector((state) => state);
-
+export const App: React.FC = () => {
   return (
-    <div>
-      <h1>Hello world</h1>
-      <button type="button" onClick={() => dispatch(removePaper('id'))}>Remove</button>
-      {console.log(papers)}
-    </div>
+    <>
+      <Hero
+        title="TOIPER"
+        subtitle="Compare price of toilet paper rolls depending on amount of layers and leafs"
+        color="info"
+      />
+      <div className="container">
+        <AddPaperForm />
+        <PapersTable />
+      </div>
+    </>
   );
 };

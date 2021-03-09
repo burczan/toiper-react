@@ -1,0 +1,10 @@
+.selector {
+  display: flex;
+  margin: 1.5rem 0;
+}
+
+.align {
+  align-items: center;
+  display: inline-flex;
+  padding-right: .5em;
+}

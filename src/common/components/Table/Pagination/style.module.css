@@ -1,0 +1,24 @@
+.paginator {
+  display: flex;
+  margin-top: 26px;
+}
+
+.block {
+  position: relative;
+  display: block;
+  background-color: lightgray;
+  cursor: pointer;
+  line-height: 1.25;
+  float: left;
+  padding: 8px 16px;
+  border: 1px solid darkgray;
+}
+
+.active {
+  background-color: lightgreen;
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
