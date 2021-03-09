@@ -58,6 +58,18 @@ export const AddPaperForm: React.FC = () => {
   return (
     <>
       <form onSubmit={onSubmit}>
+        <Select
+          label="Type"
+          htmlFor="type"
+          onChange={onSelect}
+          value={formControls.type}
+        >
+          {[
+            { value: PaperTypes.toilet, children: 'Toilet' },
+            { value: PaperTypes.towel, children: 'Towel' },
+          ]}
+        </Select>
+
         <Input
           htmlFor="name"
           name="name"
@@ -117,18 +129,6 @@ export const AddPaperForm: React.FC = () => {
           label="Length"
           required
         />
-
-        <Select
-          label="Type"
-          htmlFor="type"
-          onChange={onSelect}
-          value={formControls.type}
-        >
-          {[
-            { value: PaperTypes.toilet, children: 'Toilet' },
-            { value: PaperTypes.towel, children: 'Towel' },
-          ]}
-        </Select>
 
         <FormButton type="submit" color="danger">
           Add paper
