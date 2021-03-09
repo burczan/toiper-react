@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import cx from 'classnames';
+import { Label } from '../Label';
 import s from './style.module.css';
 
 type InputProps = {
@@ -18,6 +19,7 @@ type InputProps = {
   max?: number;
   step?: number;
   disabled?: boolean;
+  horizontal?: boolean;
 };
 
 export const Input: React.FC<InputProps> = ({
@@ -36,6 +38,7 @@ export const Input: React.FC<InputProps> = ({
   step = undefined,
   label = undefined,
   disabled = false,
+  horizontal = false,
 }) => {
   const ref = useRef<HTMLInputElement>(null);
 
@@ -47,29 +50,45 @@ export const Input: React.FC<InputProps> = ({
     }
   }, [autofocus]);
 
+  const input = (
+    <div
+      className={cx('control', { [s.center]: center })}
+      style={width ? { width: `${width}%` } : undefined}
+    >
+      <input
+        id={htmlFor}
+        name={name}
+        ref={ref}
+        type={type}
+        className="input"
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        required={required}
+        min={min}
+        max={max}
+        step={step}
+        disabled={disabled}
+      />
+    </div>
+  );
+
   return (
-    <div className="field">
-      {label && <label htmlFor={htmlFor} className="label">{label}</label>}
-      <div
-        className={cx('control', { [s.center]: center })}
-        style={width ? { width: `${width}%` } : undefined}
-      >
-        <input
-          id={htmlFor}
-          name={name}
-          ref={ref}
-          type={type}
-          className="input"
-          value={value}
-          placeholder={placeholder}
-          onChange={onChange}
-          required={required}
-          min={min}
-          max={max}
-          step={step}
-          disabled={disabled}
-        />
-      </div>
+    <div className={cx('field', { 'is-horizontal': horizontal })}>
+      {label && (<Label htmlFor={htmlFor} horizontal={horizontal}>{label}</Label>)}
+      {horizontal
+        ? (
+          <div className="field-body">
+            <div className="field">
+              {input}
+            </div>
+          </div>
+        )
+        : (
+          <>
+            {input}
+          </>
+        )}
     </div>
   );
 };

@@ -63,6 +63,7 @@ export const AddPaperForm: React.FC = () => {
           htmlFor="type"
           onChange={onSelect}
           value={formControls.type}
+          horizontal
         >
           {[
             { value: PaperTypes.toilet, children: 'Toilet' },
@@ -79,6 +80,7 @@ export const AddPaperForm: React.FC = () => {
           onChange={onInputChange}
           label="Name"
           required
+          horizontal
         />
 
         <Input
@@ -92,6 +94,7 @@ export const AddPaperForm: React.FC = () => {
           step={0.01}
           label="Price"
           required
+          horizontal
         />
 
         <Input
@@ -104,6 +107,7 @@ export const AddPaperForm: React.FC = () => {
           min={1}
           label="Layers"
           required
+          horizontal
         />
 
         <Input
@@ -116,6 +120,7 @@ export const AddPaperForm: React.FC = () => {
           min={1}
           label="Leafs"
           required
+          horizontal
         />
 
         <Input
@@ -128,9 +133,10 @@ export const AddPaperForm: React.FC = () => {
           min={0}
           label="Length"
           required
+          horizontal
         />
 
-        <FormButton type="submit" color="danger">
+        <FormButton type="submit" color="primary" horizontal>
           Add paper
         </FormButton>
       </form>

@@ -1,12 +1,17 @@
 import React from 'react';
 import { Button, ButtonProps } from '../../Button';
 
-export const FormButton: React.FC<ButtonProps> = ({
+type FormButtonProps = {
+  horizontal?: boolean;
+};
+
+export const FormButton: React.FC<ButtonProps & FormButtonProps> = ({
   type,
   color,
   children,
+  horizontal = false,
 }) => {
-  return (
+  const button = (
     <div className="field">
       <div className="control">
         <Button color={color} type={type}>
@@ -14,5 +19,26 @@ export const FormButton: React.FC<ButtonProps> = ({
         </Button>
       </div>
     </div>
+  );
+
+  return (
+    <>
+      {horizontal
+        ? (
+          <div className="field is-horizontal">
+            <div className="field-label">
+              {/* Left empty for spacing */}
+            </div>
+            <div className="field-body">
+              {button}
+            </div>
+          </div>
+        )
+        : (
+          <>
+            {button}
+          </>
+        )}
+    </>
   );
 };
