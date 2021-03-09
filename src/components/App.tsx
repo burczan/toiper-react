@@ -12,8 +12,12 @@ export const App: React.FC = () => {
         color="info"
       />
       <div className="container" style={{ maxWidth: `${window.innerWidth / 2}px` }}>
-        <AddPaperForm />
-        <PapersTable />
+        <div className="section">
+          <AddPaperForm />
+        </div>
+        <div className="section">
+          <PapersTable />
+        </div>
       </div>
     </>
   );
