@@ -9,7 +9,7 @@ export const App: React.FC = () => {
       <Hero
         title="TOIPER"
         subtitle="Compare price of toilet paper rolls depending on amount of layers and leafs"
-        color="info"
+        color="primary"
       />
       <div className="container" style={{ maxWidth: `${window.innerWidth / 2}px` }}>
         <div className="section">
