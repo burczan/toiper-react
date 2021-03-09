@@ -15,8 +15,7 @@ export const papers = produce((
       return [...state, action.payload];
     }
     case PapersActionType.REMOVE_PAPER:
-      state.filter((paper) => paper.id !== action.payload.id);
-      return state;
+      return state.filter((paper) => paper.id !== action.payload.id);
     default:
       return state;
   }
