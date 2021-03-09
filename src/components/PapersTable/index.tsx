@@ -1,16 +1,27 @@
-import React, { useEffect, useState } from 'react';
-// import cx from 'classnames';
-// import { Input } from '../../common/components/Forms';
-// import { ErrorMessage } from '../../common/components/ErrorMessage';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Icon } from '../../common/components/Icon';
 import { Table } from '../../common/components/Table';
 import { Column } from '../../common/components/Table/model';
-import { useTypedSelector } from '../../common/hooks';
-import { PaperProps } from '../../state/papers/types';
-// import s from './style.module.css';
+import { getToiletPapers } from '../../state/papers/selectors';
+import { Button } from '../../common/components/Button';
+import { removePaper } from '../../state/papers/actionCreators';
 
 export const PapersTable: React.FC = () => {
-  const { papers } = useTypedSelector((state) => state);
-  const columns: Column<keyof PaperProps>[] = [
+  const dispatch = useDispatch();
+  const papers = useSelector(getToiletPapers);
+  const papersWithActions = papers.map((paper) => ({
+    ...paper,
+    actions: (
+      <Button color="danger" onClick={() => dispatch(removePaper(paper.id))}>
+        <span className="icon">
+          <Icon name="delete" />
+        </span>
+      </Button>
+    ),
+  }));
+
+  const columns: Column<keyof typeof papersWithActions[number]>[] = [
     {
       key: 'name',
       label: 'Name',
@@ -18,12 +29,12 @@ export const PapersTable: React.FC = () => {
     },
     {
       key: 'layers',
-      label: 'Number of layers',
+      label: 'Layers',
       sortable: true,
     },
     {
-      key: 'leafs',
-      label: 'Number of leafs',
+      key: 'length',
+      label: 'Length',
       sortable: true,
     },
     {
@@ -32,19 +43,42 @@ export const PapersTable: React.FC = () => {
       sortable: true,
     },
     {
-      key: 'layerPrice',
-      label: 'LayerPrice',
+      key: 'oneMeterPrice',
+      label: 'Price of 1 m',
       sortable: true,
+    },
+    {
+      key: 'actions',
+      label: 'Actions',
     },
   ];
 
   return (
     <div>
       <Table
-        data={papers}
+        data={papersWithActions}
         columns={columns}
         isLoading={false}
       />
     </div>
   );
 };
+
+// useEffect(() => {
+//   const theTbl = document.getElementsByTagName('tbody')[0];
+//   console.log(theTbl.rows[0].cells[0].innerHTML);
+//   // for (let i = 0; i < theTbl.length; i++) {
+//   //   for (let j = 0; j < theTbl.rows[i].cells.length; j++) {
+//   //     theTbl.rows[i].cells[j].onclick = () => {};
+//   //   }
+//   // }
+
+//   // const findPaperRows = () => document.getElementsByTagName('tbody')[0].rows;
+//   // const a = document.getElementsByTagName('table').rows[i].cells[j].innerHTML;
+//   // const rows = findPaperRows();
+//   // console.log(rows.namedItem('name'));
+//   // Array.from(rows).forEach((row) => {
+//   //   console.log('s', row.querySelector(selectors));
+//   //   console.log('row', row.innerHTML, cheap[0].name);
+//   // });
+// }, [cheap]);
