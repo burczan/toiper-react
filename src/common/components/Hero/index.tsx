@@ -10,7 +10,7 @@ type HeroProps = {
 
 export const Hero: React.FC<HeroProps> = ({ title, subtitle, color }) => {
   return (
-    <section className={cx('hero', `is-${color}`)} style={{ marginBottom: '50px' }}>
+    <section className={cx('hero', `is-${color}`)}>
       <div className="hero-body">
         <div className="container has-text-centered">
           <p className="title is-1 is-family-secondary">
