@@ -15,5 +15,7 @@ export type PaperProps = {
   price: number;
   layers: number;
   leafs: number;
+  length: number;
+  oneMeterPrice: number;
   layerPrice: number;
 };

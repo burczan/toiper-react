@@ -7,6 +7,7 @@ export type AddPaperFormControls = {
   price: PaperProps['price'];
   layers: PaperProps['layers'];
   leafs: PaperProps['leafs'];
+  length: PaperProps['length'];
 };
 
 export const addPaper = ({
@@ -15,8 +16,10 @@ export const addPaper = ({
   price,
   layers,
   leafs,
+  length,
 }: AddPaperFormControls): AddPaperAction => {
   const layerPrice = price / (layers * leafs);
+  const oneMeterPrice = price / length;
 
   return {
     type: PapersActionType.ADD_PAPER,
@@ -27,6 +30,8 @@ export const addPaper = ({
       price,
       layers,
       leafs,
+      length,
+      oneMeterPrice,
       layerPrice,
     },
   };

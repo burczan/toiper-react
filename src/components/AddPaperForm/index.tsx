@@ -10,6 +10,7 @@ type FormControls = {
   layers: string;
   leafs: string;
   type: PaperTypes;
+  length: string;
 };
 
 const initFormControls: FormControls = {
@@ -18,6 +19,7 @@ const initFormControls: FormControls = {
   layers: '',
   leafs: '',
   type: PaperTypes.toilet,
+  length: '',
 };
 
 export const AddPaperForm: React.FC = () => {
@@ -46,6 +48,7 @@ export const AddPaperForm: React.FC = () => {
       layers: Number(formControls.layers),
       leafs: Number(formControls.leafs),
       type: formControls.type,
+      length: Number(formControls.length),
     };
 
     dispatch(addPaper(paper));
@@ -100,6 +103,18 @@ export const AddPaperForm: React.FC = () => {
           onChange={onInputChange}
           min={1}
           label="Leafs"
+          required
+        />
+
+        <Input
+          htmlFor="length"
+          name="length"
+          placeholder="length"
+          type="number"
+          value={formControls.length}
+          onChange={onInputChange}
+          min={0}
+          label="Length"
           required
         />
 
