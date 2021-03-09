@@ -74,6 +74,7 @@ export const AddPaperForm: React.FC = () => {
           value={formControls.price}
           onChange={onInputChange}
           min={0}
+          step={0.01}
           label="Price"
           required
         />

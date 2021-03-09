@@ -16,6 +16,7 @@ type InputProps = {
   label?: string;
   min?: number;
   max?: number;
+  step?: number;
   disabled?: boolean;
 };
 
@@ -32,6 +33,7 @@ export const Input: React.FC<InputProps> = ({
   required = false,
   min = undefined,
   max = undefined,
+  step = undefined,
   label = undefined,
   disabled = false,
 }) => {
@@ -64,6 +66,7 @@ export const Input: React.FC<InputProps> = ({
           required={required}
           min={min}
           max={max}
+          step={step}
           disabled={disabled}
         />
       </div>
