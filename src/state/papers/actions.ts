@@ -5,6 +5,11 @@ export type AddPaperAction = {
   payload: PaperProps;
 };
 
+export type EditPaperAction = {
+  type: PapersActionType.EDIT_PAPER;
+  payload: PaperProps;
+};
+
 export type RemovePaperAction = {
   type: PapersActionType.REMOVE_PAPER;
   payload: {
@@ -12,4 +17,4 @@ export type RemovePaperAction = {
   };
 };
 
-export type PaperAction = AddPaperAction | RemovePaperAction;
+export type PaperAction = AddPaperAction | EditPaperAction | RemovePaperAction;

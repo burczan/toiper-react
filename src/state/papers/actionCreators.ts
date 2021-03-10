@@ -1,4 +1,4 @@
-import { AddPaperAction, RemovePaperAction } from './actions';
+import { AddPaperAction, EditPaperAction, RemovePaperAction } from './actions';
 import { PapersActionType, PaperTypes, PaperProps } from './types';
 
 export type AddPaperFormControls = {
@@ -23,6 +23,33 @@ export const addPaper = ({
 
   return {
     type: PapersActionType.ADD_PAPER,
+    payload: {
+      id: Math.random().toString(36).substr(3, 9),
+      type,
+      name,
+      price,
+      layers,
+      leafs,
+      length,
+      oneMeterPrice,
+      layerPrice,
+    },
+  };
+};
+
+export const editPaper = ({
+  type,
+  name,
+  price,
+  layers,
+  leafs,
+  length,
+}: AddPaperFormControls): EditPaperAction => {
+  const layerPrice = price / (layers * leafs);
+  const oneMeterPrice = Math.round((price / length) * 100) / 100;
+
+  return {
+    type: PapersActionType.EDIT_PAPER,
     payload: {
       id: Math.random().toString(36).substr(3, 9),
       type,

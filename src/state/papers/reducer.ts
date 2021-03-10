@@ -14,6 +14,9 @@ export const papers = produce((
     case PapersActionType.ADD_PAPER: {
       return [...state, action.payload];
     }
+    case PapersActionType.EDIT_PAPER: {
+      return [...state, action.payload];
+    }
     case PapersActionType.REMOVE_PAPER:
       return state.filter((paper) => paper.id !== action.payload.id);
     default:

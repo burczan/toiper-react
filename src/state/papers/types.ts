@@ -1,5 +1,6 @@
 export enum PapersActionType {
   ADD_PAPER = 'add_paper',
+  EDIT_PAPER = 'edit_paper',
   REMOVE_PAPER = 'remove_paper',
 }
 
