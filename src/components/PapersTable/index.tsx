@@ -1,24 +1,15 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Icon } from '../../common/components/Icon';
+import { useSelector } from 'react-redux';
 import { Table } from '../../common/components/Table';
 import { Column } from '../../common/components/Table/model';
 import { getToiletPapers } from '../../state/papers/selectors';
-import { Button } from '../../common/components/Button';
-import { removePaper } from '../../state/papers/actionCreators';
+import { Actions } from './Actions';
 
 export const PapersTable = () => {
-  const dispatch = useDispatch();
   const papers = useSelector(getToiletPapers);
   const papersWithActions = papers.map((paper) => ({
     ...paper,
-    actions: (
-      <Button color="danger" onClick={() => dispatch(removePaper(paper.id))}>
-        <span className="icon">
-          <Icon name="delete" />
-        </span>
-      </Button>
-    ),
+    actions: <Actions paper={paper} />,
   }));
 
   const columns: Column<keyof typeof papersWithActions[number]>[] = [
