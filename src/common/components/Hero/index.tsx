@@ -8,7 +8,7 @@ type HeroProps = {
   color: Color;
 };
 
-export const Hero: React.FC<HeroProps> = ({ title, subtitle, color }) => {
+export const Hero = ({ title, subtitle, color }: HeroProps) => {
   return (
     <section className={cx('hero', `is-${color}`)}>
       <div className="hero-body">

@@ -22,7 +22,7 @@ type InputProps = {
   horizontal?: boolean;
 };
 
-export const Input: React.FC<InputProps> = ({
+export const Input = ({
   value,
   onChange,
   htmlFor,
@@ -39,7 +39,7 @@ export const Input: React.FC<InputProps> = ({
   label = undefined,
   disabled = false,
   horizontal = false,
-}) => {
+}: InputProps) => {
   const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {

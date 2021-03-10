@@ -7,7 +7,7 @@ import { getToiletPapers } from '../../state/papers/selectors';
 import { Button } from '../../common/components/Button';
 import { removePaper } from '../../state/papers/actionCreators';
 
-export const PapersTable: React.FC = () => {
+export const PapersTable = () => {
   const dispatch = useDispatch();
   const papers = useSelector(getToiletPapers);
   const papersWithActions = papers.map((paper) => ({

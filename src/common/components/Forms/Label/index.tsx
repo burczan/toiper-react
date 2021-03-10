@@ -6,11 +6,11 @@ type LabelProps = {
   horizontal?: boolean;
 };
 
-export const Label: React.FC<LabelProps> = ({
+export const Label = ({
   htmlFor,
   children,
   horizontal = false,
-}) => {
+}: LabelProps) => {
   const label = (
     <label htmlFor={htmlFor} className="label">
       {children}

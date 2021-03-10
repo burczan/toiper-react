@@ -13,7 +13,7 @@ export const Table = <Data extends unknown>({
   columns,
   isLoading,
   pagination = false,
-}: TableProps<Data>): JSX.Element => {
+}: TableProps<Data>) => {
   const {
     filters,
     setFilters,

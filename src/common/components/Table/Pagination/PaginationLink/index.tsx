@@ -10,11 +10,11 @@ type PaginationLinkProps = {
   onPageChange: (page: number) => void;
 };
 
-export const PaginationLink: React.FC<PaginationLinkProps> = ({
+export const PaginationLink = ({
   page,
   isCurrentPage,
   onPageChange,
-}) => {
+}: PaginationLinkProps) => {
   return (
     <li>
       <a

@@ -29,7 +29,7 @@ const options: { [Key in RowType]: Props } = {
   },
 };
 
-export const RowWithoutColumns = ({ colSpan, type }: RowWithoutColumnsProps): JSX.Element => {
+export const RowWithoutColumns = ({ colSpan, type }: RowWithoutColumnsProps) => {
   return (
     <Row key={options[type].rowKey}>
       <Cell colSpan={colSpan} key={options[type].cellKey} className="has-text-centered">

@@ -6,11 +6,11 @@ import cx from 'classnames';
 import { RowsPerPageSelectorProps } from '../model';
 import s from './style.module.css';
 
-export const RowsPerPageSelector: React.FC<RowsPerPageSelectorProps> = ({
+export const RowsPerPageSelector = ({
   options,
   rowsPerPage,
   onSelectorChange,
-}) => (
+}: RowsPerPageSelectorProps) => (
   <div className={s.selector}>
     <span className={cx(s.align)}>Rows per page:</span>
     {options.map((option) => {

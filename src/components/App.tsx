@@ -5,7 +5,7 @@ import { Hero } from '../common/components/Hero';
 import { AddPaperForm } from './AddPaperForm';
 import { PapersTable } from './PapersTable';
 
-export const App: React.FC = () => {
+export const App = () => {
   const cheapest = useSelector(getCheapestToiletPaper);
 
   return (

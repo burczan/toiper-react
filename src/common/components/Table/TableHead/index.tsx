@@ -8,7 +8,7 @@ export const TableHeader = <Data extends unknown>({
   columns,
   filters: { order, orderBy },
   onChangeSort,
-}: HeaderProps<Data>): JSX.Element => {
+}: HeaderProps<Data>) => {
   const totalColumnsWidth = columns.reduce((acc, { width }) => acc + (width || 0), 0);
   if (totalColumnsWidth > 100) {
     throw new RangeError(

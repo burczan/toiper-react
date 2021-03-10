@@ -6,11 +6,11 @@ import { PaginationLink } from './PaginationLink';
 import { PaginationProps } from '../model';
 import s from './style.module.css';
 
-export const Pagination: React.FC<PaginationProps> = ({
+export const Pagination = ({
   currentPage,
   totalPageNumber,
   onPageChange,
-}) => {
+}: PaginationProps) => {
   const pages = Array.from({ length: totalPageNumber }, (_, i) => i + 1);
   const isFirstPage = currentPage - 1 === 0;
   const isLastPage = currentPage + 1 > totalPageNumber;

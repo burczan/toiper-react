@@ -5,12 +5,12 @@ type FormButtonProps = {
   horizontal?: boolean;
 };
 
-export const FormButton: React.FC<ButtonProps & FormButtonProps> = ({
+export const FormButton = ({
   type,
   color,
   children,
   horizontal = false,
-}) => {
+}: ButtonProps & FormButtonProps) => {
   const button = (
     <div className="field">
       <div className="control">

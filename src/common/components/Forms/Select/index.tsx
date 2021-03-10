@@ -12,14 +12,14 @@ type SelectProps = {
   horizontal?: boolean;
 };
 
-export const Select: React.FC<SelectProps> = ({
+export const Select = ({
   label,
   children,
   htmlFor,
   onChange,
   value,
   horizontal = false,
-}) => {
+}: SelectProps) => {
   const select = (
     <div className="control">
       <div className="select">

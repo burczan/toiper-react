@@ -22,7 +22,7 @@ const initFormControls: FormControls = {
   length: '',
 };
 
-export const AddPaperForm: React.FC = () => {
+export const AddPaperForm = () => {
   const dispatch = useDispatch();
   const [formControls, setFormControls] = useState(initFormControls);
 

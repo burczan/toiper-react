@@ -10,12 +10,12 @@ export type ButtonProps = {
   type?: 'submit' | 'reset' | 'button';
 };
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
   children,
   color,
   onClick,
   type = 'button',
-}) => {
+}: ButtonProps) => {
   return (
     <button
       type={type}

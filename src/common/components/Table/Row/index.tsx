@@ -1,7 +1,7 @@
 import React from 'react';
 import { RowProps } from '../model';
 
-export const Row: React.FC<RowProps> = ({ children }) => {
+export const Row = ({ children }: RowProps) => {
   return (
     <tr>
       {children}

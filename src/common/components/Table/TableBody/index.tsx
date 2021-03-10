@@ -9,7 +9,7 @@ export const TableBody = <Data extends unknown>({
   data,
   columns,
   isLoading,
-}: BodyProps<Data>): JSX.Element => {
+}: BodyProps<Data>) => {
   if (isLoading) {
     return (
       <tbody>
