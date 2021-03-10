@@ -1,12 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Table } from '../../common/components/Table';
 import { Column } from '../../common/components/Table/model';
-import { getToiletPapers } from '../../state/papers/selectors';
+import { useTypedSelector } from '../../common/hooks';
+import { getPapersByType } from '../../state/papers/selectors';
+import { PaperTypes } from '../../state/papers/types';
 import { Actions } from './Actions';
 
 export const PapersTable = () => {
-  const papers = useSelector(getToiletPapers);
+  const papers = useTypedSelector((state) => getPapersByType(state, PaperTypes.toilet));
   const papersWithActions = papers.map((paper) => ({
     ...paper,
     actions: <Actions paper={paper} />,
