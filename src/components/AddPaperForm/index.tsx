@@ -166,7 +166,7 @@ export const AddPaperForm = () => {
           label="Name"
           required
           horizontal
-          helperText={errors.name ? errors.name : undefined}
+          helperText={errors.name ?? undefined}
         />
 
         <Input
@@ -181,7 +181,7 @@ export const AddPaperForm = () => {
           label="Price"
           required
           horizontal
-          helperText={errors.price ? errors.price : undefined}
+          helperText={errors.price ?? undefined}
         />
 
         <Input
@@ -195,7 +195,7 @@ export const AddPaperForm = () => {
           label="Layers"
           required
           horizontal
-          helperText={errors.layers ? errors.layers : undefined}
+          helperText={errors.layers ?? undefined}
         />
 
         <Input
@@ -209,7 +209,7 @@ export const AddPaperForm = () => {
           label="Leafs"
           required
           horizontal
-          helperText={errors.leafs ? errors.leafs : undefined}
+          helperText={errors.leafs ?? undefined}
         />
 
         <Input
@@ -223,7 +223,7 @@ export const AddPaperForm = () => {
           label="Length"
           required
           horizontal
-          helperText={errors.length ? errors.length : undefined}
+          helperText={errors.length ?? undefined}
         />
 
         <FormButton type="submit" color="primary" horizontal disabled={!isFormValid}>
