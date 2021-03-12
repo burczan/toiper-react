@@ -1,78 +1,68 @@
-type ValidationStatus = {
-  [inputName: string]: {
-    validationMessage: string,
-    validity: ValidityState,
-  };
-};
-
-type Output = {
-  inputs: ValidationStatus;
-  allFieldsValid: boolean;
-};
-
-export const validateForm = (form: HTMLFormElement): Output => {
-  const formData = new FormData(form);
-  const validationStatus = Array
-    .from(formData.keys())
-    .reduce((prev, inputName) => {
-      const el = form.elements.namedItem(inputName) as HTMLObjectElement;
-      return {
-        ...prev,
-        [inputName]: {
-          validationMessage: el.validationMessage,
-          validity: el.validity,
-        },
-      };
-    }, {} as ValidationStatus);
-
-  return { inputs: validationStatus, allFieldsValid: form.checkValidity() };
-};
+import { typedBoolean } from '../../../utils/types';
 
 export type ErrorMessages<FormControls> = {
   [InputName in keyof FormControls]: string;
 };
 
-export const setRequiredErrorMsgOnSubmit = <FormControls>(
-  form: HTMLFormElement,
-  message: string,
-): ErrorMessages<FormControls> => {
-  const formData = new FormData(form);
-  const errorMessages = Array
-    .from(formData.keys())
-    .reduce((prev, inputName) => {
-      const el = form.elements.namedItem(inputName) as HTMLObjectElement;
-      if (el.validity.valueMissing) {
-        return {
-          ...prev,
-          [el.name]: message,
-        };
-      }
+export type CustomValidationRules<FormControls> = {
+  [InputName in keyof FormControls]?: {
+    condition: boolean;
+    errorMessage: string;
+  }[]
+};
 
-      return prev;
-    }, {} as ErrorMessages<FormControls>);
+type AllowedHtmlElements =
+  | HTMLButtonElement
+  | HTMLInputElement
+  | HTMLOutputElement
+  | HTMLSelectElement
+  | HTMLTextAreaElement;
+
+type ValidityKey = keyof ValidityState;
+
+const validityKeys: ValidityKey[] = [
+  'badInput',
+  'patternMismatch',
+  'rangeOverflow',
+  'rangeUnderflow',
+  'stepMismatch',
+  'tooLong',
+  'tooShort',
+  'typeMismatch',
+  'valueMissing',
+];
+
+export const hasError = <FormControls>(errors: ErrorMessages<FormControls>) => {
+  return Object.values(errors).filter(typedBoolean).length > 0;
+};
+
+export const validateInput = <FormControls>(
+  input: AllowedHtmlElements,
+  customValidationRules: CustomValidationRules<FormControls>,
+): ErrorMessages<FormControls> => {
+  const errorMessages = {} as ErrorMessages<FormControls>;
+  const inputName = input.name as keyof FormControls;
+
+  customValidationRules[inputName]?.forEach((rule) => {
+    if (rule.condition) {
+      errorMessages[inputName] = rule.errorMessage;
+      return errorMessages;
+    }
+
+    errorMessages[inputName] = '';
+    return errorMessages;
+  });
+
+  const error = hasError(errorMessages);
+  if (error) {
+    return errorMessages;
+  }
+
+  validityKeys.forEach((key) => {
+    if (input.validity[key]) {
+      errorMessages[inputName] = input.validationMessage;
+    }
+  });
 
   return errorMessages;
 };
-
-// export const setRequiredErrorMsgOnSubmit = <ErrorMessages, FieldsErrors>(
-//   form: HTMLFormElement,
-//   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   fieldErrors: any, // FieldsErrors,
-// ): ErrorMessages => {
-//   const formData = new FormData(form);
-//   const errorMessages = Array
-//     .from(formData.keys())
-//     .reduce((prev, inputName) => {
-//       const el = form.elements.namedItem(inputName) as HTMLObjectElement;
-//       if (el.validity.valueMissing) {
-//         return {
-//           ...prev,
-//           [el.name]: fieldErrors.common.required,
-//         };
-//       }
-
-//       return prev;
-//     }, {} as ErrorMessages);
-
-//   return errorMessages;
-// };

@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addPaper, AddPaperFormControls } from '../../state/papers/actionCreators';
 import { PaperTypes } from '../../state/papers/types';
-import { FormButton, Input, Select } from '../../common/components/Forms';
-import {
-  validateForm,
-  setRequiredErrorMsgOnSubmit,
-  ErrorMessages,
-} from '../../common/components/Forms/helpers/validation';
 import { getTakenNames } from '../../state/papers/selectors';
+import { addPaper, AddPaperFormControls } from '../../state/papers/actionCreators';
+import {
+  validateInput,
+  hasError,
+  ErrorMessages,
+  CustomValidationRules,
+} from '../../common/components/Forms/helpers/validation';
 import { useTypedSelector } from '../../common/hooks';
+import { FormButton, Input, Select } from '../../common/components/Forms';
 
 type FormControls = {
   name: string;
@@ -38,28 +39,34 @@ const initErrorMessages: ErrorMessages<FormControls> = {
   length: '',
 };
 
-const fieldErrors = {
-  common: {
-    required: 'This field is required',
-  },
-  name: 'Name is already taken',
-};
-
 export const AddPaperForm = () => {
   const dispatch = useDispatch();
   const formRef = useRef<HTMLFormElement>(null);
   const [formControls, setFormControls] = useState(initFormControls);
   const [errors, setErrors] = useState(initErrorMessages);
   const [isFormValid, setIsFormValid] = useState(false);
+
   const takenNames = useTypedSelector(getTakenNames);
+  const [names, setName] = useState(takenNames);
 
   useEffect(() => {
-    if (formRef.current) {
-      if (formRef.current.checkValidity()) {
-        setIsFormValid(true);
-      }
+    if (formRef.current?.checkValidity()) {
+      setIsFormValid(true);
     }
   }, [formControls]);
+
+  useEffect(() => {
+    const error = hasError(errors);
+    if (error) {
+      setIsFormValid(false);
+    }
+  }, [errors]);
+
+  useEffect(() => {
+    if (takenNames) {
+      setName(takenNames);
+    }
+  }, [takenNames]);
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormControls({
@@ -67,48 +74,46 @@ export const AddPaperForm = () => {
       [event.target.name]: event.target.value,
     });
 
-    switch (event.target.name as keyof FormControls) {
-      case 'name': {
-        if (takenNames.includes(event.target.value)) {
-          setErrors({ ...errors, name: fieldErrors.name });
-        } else {
-          setErrors({ ...errors, name: '' });
-        }
-        break;
-      }
-      case 'price': {
-        if (event.target.validity.valueMissing) {
-          setErrors({ ...errors, price: fieldErrors.common.required });
-        } else {
-          setErrors({ ...errors, price: '' });
-        }
-        break;
-      }
-      case 'leafs': {
-        if (event.target.validity.valueMissing) {
-          setErrors({ ...errors, leafs: fieldErrors.common.required });
-        } else {
-          setErrors({ ...errors, leafs: '' });
-        }
-        break;
-      }
-      case 'layers': {
-        if (event.target.validity.valueMissing) {
-          setErrors({ ...errors, layers: fieldErrors.common.required });
-        } else {
-          setErrors({ ...errors, layers: '' });
-        }
-        break;
-      }
-      case 'length': {
-        if (event.target.validity.valueMissing) {
-          setErrors({ ...errors, length: fieldErrors.common.required });
-        } else {
-          setErrors({ ...errors, length: '' });
-        }
-        break;
-      }
-    }
+    const customRules: CustomValidationRules<FormControls> = {
+      name: [
+        {
+          condition: event.target.value.length > 3,
+          errorMessage: 'Too long.',
+        },
+        {
+          condition: names.includes(event.target.value),
+          errorMessage: 'This name is already taken.',
+        },
+
+      ],
+      price: [
+        {
+          condition: event.target.valueAsNumber === 1,
+          errorMessage: 'Cannot be equal 1',
+        },
+      ],
+      leafs: [
+        {
+          condition: event.target.valueAsNumber === 2,
+          errorMessage: 'Cannot be equal 2',
+        },
+      ],
+      layers: [
+        {
+          condition: event.target.valueAsNumber === 3,
+          errorMessage: 'Cannot be equal 3',
+        },
+      ],
+      length: [
+        {
+          condition: event.target.valueAsNumber === 4,
+          errorMessage: 'Cannot be equal 4',
+        },
+      ],
+    };
+
+    const inputErrors = validateInput(event.target, customRules);
+    setErrors({ ...errors, ...inputErrors });
   };
 
   const onSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -117,16 +122,8 @@ export const AddPaperForm = () => {
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    const form = event.target as HTMLFormElement;
 
-    const errorMessages = setRequiredErrorMsgOnSubmit<FormControls>(form, fieldErrors.common.required);
-    setErrors(errorMessages);
-
-    // const { inputs, allFieldsValid } = validateForm(event.target as HTMLFormElement);
-    const allFieldsValid = form.checkValidity();
-    setIsFormValid(allFieldsValid);
-
-    if (allFieldsValid) {
+    if (isFormValid) {
       const paper: AddPaperFormControls = {
         name: formControls.name,
         price: Number(formControls.price),
