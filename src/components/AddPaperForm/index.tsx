@@ -67,7 +67,7 @@ export const AddPaperForm = () => {
       [event.target.name]: event.target.value,
     });
 
-    switch (event.target.name) {
+    switch (event.target.name as keyof FormControls) {
       case 'name': {
         if (takenNames.includes(event.target.value)) {
           setErrors({ ...errors, name: fieldErrors.name });
