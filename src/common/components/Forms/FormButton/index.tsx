@@ -9,12 +9,13 @@ export const FormButton = ({
   type,
   color,
   children,
+  disabled = false,
   horizontal = false,
 }: ButtonProps & FormButtonProps) => {
   const button = (
     <div className="field">
       <div className="control">
-        <Button color={color} type={type}>
+        <Button color={color} type={type} disabled={disabled}>
           {children}
         </Button>
       </div>

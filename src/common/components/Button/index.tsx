@@ -8,6 +8,7 @@ export type ButtonProps = {
   color: Color;
   onClick?: () => void;
   type?: 'submit' | 'reset' | 'button';
+  disabled?: boolean;
 };
 
 export const Button = ({
@@ -15,12 +16,14 @@ export const Button = ({
   color,
   onClick,
   type = 'button',
+  disabled = false,
 }: ButtonProps) => {
   return (
     <button
       type={type}
       className={cx('button', `is-${color}`)}
       onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>

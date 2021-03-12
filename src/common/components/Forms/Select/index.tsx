@@ -4,6 +4,7 @@ import { Label } from '../Label';
 import { Option, OptionProps } from './Option';
 
 type SelectProps = {
+  name: string;
   label: string;
   children: OptionProps[];
   htmlFor: string;
@@ -13,6 +14,7 @@ type SelectProps = {
 };
 
 export const Select = ({
+  name,
   label,
   children,
   htmlFor,
@@ -23,7 +25,7 @@ export const Select = ({
   const select = (
     <div className="control">
       <div className="select">
-        <select id={htmlFor} value={value} name="types" onChange={onChange}>
+        <select id={htmlFor} value={value} name={name} onChange={onChange}>
           {children.map((option) => (
             <Option value={option.value} key={option.value}>
               {option.children}

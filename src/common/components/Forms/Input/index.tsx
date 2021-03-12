@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import cx from 'classnames';
 import { Label } from '../Label';
+import { Help } from '../Help';
 import s from './style.module.css';
 
 type InputProps = {
@@ -20,6 +21,7 @@ type InputProps = {
   step?: number;
   disabled?: boolean;
   horizontal?: boolean;
+  helperText?: string;
 };
 
 export const Input = ({
@@ -39,6 +41,7 @@ export const Input = ({
   label = undefined,
   disabled = false,
   horizontal = false,
+  helperText = undefined,
 }: InputProps) => {
   const ref = useRef<HTMLInputElement>(null);
 
@@ -70,6 +73,7 @@ export const Input = ({
         step={step}
         disabled={disabled}
       />
+      {helperText && <Help color="danger">{helperText}</Help>}
     </div>
   );
 
