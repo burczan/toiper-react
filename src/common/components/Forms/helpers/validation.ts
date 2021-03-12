@@ -40,28 +40,27 @@ export const validateInput = <FormControls>(
   input: AllowedHtmlElements,
   customValidationRules: CustomValidationRules<FormControls>,
 ): ErrorMessages<FormControls> => {
-  const errorMessages = {} as ErrorMessages<FormControls>;
   const inputName = input.name as keyof FormControls;
+  const errorMessages = { [inputName]: '' } as ErrorMessages<FormControls>;
 
-  customValidationRules[inputName]?.forEach((rule) => {
+  customValidationRules[inputName]?.some((rule) => {
     if (rule.condition) {
       errorMessages[inputName] = rule.errorMessage;
-      return errorMessages;
+      return true;
     }
-
-    errorMessages[inputName] = '';
-    return errorMessages;
+    return false;
   });
 
-  const error = hasError(errorMessages);
-  if (error) {
+  if (hasError(errorMessages)) {
     return errorMessages;
   }
 
-  validityKeys.forEach((key) => {
+  validityKeys.some((key) => {
     if (input.validity[key]) {
       errorMessages[inputName] = input.validationMessage;
+      return true;
     }
+    return false;
   });
 
   return errorMessages;
