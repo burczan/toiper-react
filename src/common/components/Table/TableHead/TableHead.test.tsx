@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { TableHeader } from '.';
+import { TableHead } from '.';
 import { Filters } from '../model';
 import { columns, Data } from '../test-data';
 
@@ -11,7 +11,7 @@ describe('<TableHead />', () => {
     const filters: Filters<Data> = { order: undefined, orderBy: undefined };
     render(
       <table>
-        <TableHeader
+        <TableHead
           columns={columns}
           filters={filters}
           onChangeSort={onChangeSort}
@@ -26,7 +26,7 @@ describe('<TableHead />', () => {
     const filters: Filters<Data> = { order: 'asc', orderBy: 'name' };
     render(
       <table>
-        <TableHeader
+        <TableHead
           columns={columns}
           filters={filters}
           onChangeSort={onChangeSort}
@@ -43,7 +43,7 @@ describe('<TableHead />', () => {
     });
     render(
       <table>
-        <TableHeader
+        <TableHead
           columns={columns}
           filters={filters}
           onChangeSort={onChangeSort}
@@ -61,7 +61,7 @@ describe('<TableHead />', () => {
     });
     render(
       <table>
-        <TableHeader
+        <TableHead
           columns={columns}
           filters={filters}
           onChangeSort={onChangeSort}

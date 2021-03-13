@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { TableHeader } from './TableHead';
+import { TableHead } from './TableHead';
 import { TableBody } from './TableBody';
 import { RowsPerPageSelector } from './RowsPerPageSelector';
 import { Pagination } from './Pagination';
@@ -49,7 +49,7 @@ export const Table = <Data extends unknown>({
         />
       )}
       <table className={cx('table is-striped is-bordered is-hoverable is-fullwidth', s.layout)}>
-        <TableHeader
+        <TableHead
           columns={columns}
           filters={filters}
           onChangeSort={setFilters}

@@ -4,7 +4,7 @@ import { HeaderProps } from '../model';
 import { Icon } from '../../Icon';
 import s from './style.module.css';
 
-export const TableHeader = <Data extends unknown>({
+export const TableHead = <Data extends unknown>({
   columns,
   filters: { order, orderBy },
   onChangeSort,
