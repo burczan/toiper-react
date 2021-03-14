@@ -10,16 +10,16 @@ import {
   CustomValidationRules,
 } from '../../common/components/Forms/helpers/validation';
 import { useTypedSelector } from '../../common/hooks';
-import { FormButton, Input, Select } from '../../common/components/Forms';
-
-type FormControls = {
-  name: string;
-  price: string;
-  layers: string;
-  leafs: string;
-  type: PaperTypes;
-  length: string;
-};
+import {
+  PaperType,
+  PaperName,
+  PaperPrice,
+  PaperLayers,
+  PaperLeafs,
+  PaperLength,
+  SubmitButton,
+  FormControls,
+} from './FormConfig';
 
 const initFormControls: FormControls = {
   name: '',
@@ -84,7 +84,6 @@ export const AddPaperForm = () => {
           condition: names.includes(event.target.value),
           errorMessage: 'This name is already taken.',
         },
-
       ],
       price: [
         {
@@ -142,93 +141,14 @@ export const AddPaperForm = () => {
   return (
     <>
       <form ref={formRef} onSubmit={onSubmit} noValidate>
-        <Select
-          name="type"
-          label="Type"
-          htmlFor="type"
-          onChange={onSelect}
-          value={formControls.type}
-          horizontal
-        >
-          {[
-            { value: PaperTypes.toilet, children: 'Toilet' },
-            { value: PaperTypes.towel, children: 'Towel' },
-          ]}
-        </Select>
+        <PaperType value={formControls.type} onChange={onSelect} />
+        <PaperName value={formControls.name} onChange={onInputChange} error={errors.name ?? undefined} />
+        <PaperPrice value={formControls.price} onChange={onInputChange} error={errors.price ?? undefined} />
+        <PaperLayers value={formControls.layers} onChange={onInputChange} error={errors.layers ?? undefined} />
+        <PaperLeafs value={formControls.leafs} onChange={onInputChange} error={errors.leafs ?? undefined} />
+        <PaperLength value={formControls.length} onChange={onInputChange} error={errors.length ?? undefined} />
 
-        <Input
-          htmlFor="name"
-          name="name"
-          placeholder="name"
-          type="text"
-          value={formControls.name}
-          onChange={onInputChange}
-          label="Name"
-          required
-          horizontal
-          helperText={errors.name ?? undefined}
-        />
-
-        <Input
-          htmlFor="price"
-          name="price"
-          placeholder="price"
-          type="number"
-          value={formControls.price}
-          onChange={onInputChange}
-          min={0}
-          step={0.01}
-          label="Price"
-          required
-          horizontal
-          helperText={errors.price ?? undefined}
-        />
-
-        <Input
-          htmlFor="layers"
-          name="layers"
-          placeholder="layers"
-          type="number"
-          value={formControls.layers}
-          onChange={onInputChange}
-          min={1}
-          label="Layers"
-          required
-          horizontal
-          helperText={errors.layers ?? undefined}
-        />
-
-        <Input
-          htmlFor="leafs"
-          name="leafs"
-          placeholder="leafs"
-          type="number"
-          value={formControls.leafs}
-          onChange={onInputChange}
-          min={1}
-          label="Leafs"
-          required
-          horizontal
-          helperText={errors.leafs ?? undefined}
-        />
-
-        <Input
-          htmlFor="length"
-          name="length"
-          placeholder="length"
-          type="number"
-          value={formControls.length}
-          onChange={onInputChange}
-          min={1}
-          label="Length"
-          required
-          horizontal
-          helperText={errors.length ?? undefined}
-        />
-
-        <FormButton type="submit" color="primary" horizontal disabled={!isFormValid}>
-          Add paper
-        </FormButton>
+        <SubmitButton text="Add paper" disabled={!isFormValid} />
       </form>
     </>
   );
