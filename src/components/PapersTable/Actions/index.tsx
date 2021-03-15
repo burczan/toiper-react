@@ -15,14 +15,10 @@ export const Actions = ({ paper }: ActionsProps) => {
   return (
     <>
       <Button color="primary" onClick={() => console.log('edit paper placeholder')}>
-        <span className="icon">
-          <Icon name="edit" />
-        </span>
+        <Icon name="edit" />
       </Button>
       <Button color="danger" onClick={() => dispatch(removePaper(paper.id))}>
-        <span className="icon">
-          <Icon name="delete" />
-        </span>
+        <Icon name="trash" />
       </Button>
     </>
   );

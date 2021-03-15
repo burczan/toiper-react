@@ -1,13 +1,17 @@
 import React from 'react';
-import cx from 'classnames';
-import s from './style.module.css';
 
 type IconProps = {
   name: string;
+  label?: string;
 };
 
-export const Icon = ({ name }: IconProps) => {
+export const Icon = ({ name, label }: IconProps) => {
   return (
-    <i className={cx('material-icons', s.align)} title={name}>{name}</i>
+    <span className="icon-text">
+      {label && <span>{label}</span>}
+      <span className="icon">
+        <i className={`fas fa-${name}`} />
+      </span>
+    </span>
   );
 };

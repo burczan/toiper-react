@@ -24,11 +24,11 @@ export const TableHead = <Data extends unknown>({
         }) => {
           let state = 'sort';
           if (sortable && orderBy === key) {
-            state = order === 'desc' ? 'arrow_downward' : 'arrow_upward';
+            state = order === 'desc' ? 'sort-amount-down' : 'sort-amount-up';
           }
           return (
             <th
-              key={`${key}`}
+              key={key as string}
               onClick={() => sortable && onChangeSort({
                 orderBy: key,
                 order: order === 'desc' ? 'asc' : 'desc',
@@ -36,8 +36,7 @@ export const TableHead = <Data extends unknown>({
               className={cx({ [s.pointer]: sortable })}
               style={{ width: `${width}%` }}
             >
-              {label}
-              {sortable && <Icon name={state} />}
+              {sortable ? <Icon name={state} label={label} /> : label}
             </th>
           );
         })}
