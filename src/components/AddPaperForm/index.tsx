@@ -5,7 +5,6 @@ import { getTakenNames } from '../../state/papers/selectors';
 import { addPaper, AddPaperFormControls } from '../../state/papers/actionCreators';
 import {
   validateInput,
-  ErrorMessages,
   CustomValidationRules,
 } from '../../common/components/Forms/helpers/validation';
 import { useFormValidation } from '../../common/components/Forms/helpers/useFormValidation';
@@ -19,25 +18,9 @@ import {
   PaperLength,
   SubmitButton,
   FormControls,
+  initFormControls,
+  initErrorMessages,
 } from './FormConfig';
-
-const initFormControls: FormControls = {
-  name: '',
-  price: '',
-  layers: '',
-  leafs: '',
-  type: PaperTypes.toilet,
-  length: '',
-};
-
-const initErrorMessages: ErrorMessages<FormControls> = {
-  name: '',
-  price: '',
-  layers: '',
-  leafs: '',
-  type: '',
-  length: '',
-};
 
 export const AddPaperForm = () => {
   const dispatch = useDispatch();

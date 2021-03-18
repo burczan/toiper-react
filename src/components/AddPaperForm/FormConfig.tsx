@@ -1,6 +1,7 @@
 import React from 'react';
 import { PaperTypes } from '../../state/papers/types';
 import { FormButton, Input, Select } from '../../common/components/Forms';
+import { ErrorMessages } from '../../common/components/Forms/helpers/validation';
 
 type SelectProps = {
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -20,6 +21,24 @@ export type FormControls = {
   leafs: string;
   type: PaperTypes;
   length: string;
+};
+
+export const initFormControls: FormControls = {
+  name: '',
+  price: '',
+  layers: '',
+  leafs: '',
+  type: PaperTypes.toilet,
+  length: '',
+};
+
+export const initErrorMessages: ErrorMessages<FormControls> = {
+  name: '',
+  price: '',
+  layers: '',
+  leafs: '',
+  type: '',
+  length: '',
 };
 
 export const PaperType = ({ onChange, value }: SelectProps) => {
