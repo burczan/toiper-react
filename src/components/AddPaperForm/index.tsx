@@ -4,8 +4,7 @@ import { PaperTypes } from '../../state/papers/types';
 import { getTakenNames } from '../../state/papers/selectors';
 import { addPaper, AddPaperFormControls } from '../../state/papers/actionCreators';
 import { validateInput } from '../../common/components/Forms/helpers/validation';
-import { useFormValidation } from '../../common/components/Forms/helpers/useFormValidation';
-import { useTypedSelector } from '../../common/hooks';
+import { useTypedSelector, useFormValidation } from '../../common/hooks';
 import {
   PaperType,
   PaperName,
