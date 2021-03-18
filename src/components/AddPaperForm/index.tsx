@@ -42,12 +42,17 @@ const initErrorMessages: ErrorMessages<FormControls> = {
 export const AddPaperForm = () => {
   const dispatch = useDispatch();
   const [formControls, setFormControls] = useState(initFormControls);
-  const [errors, setErrors] = useState(initErrorMessages);
 
   const takenNames = useTypedSelector(getTakenNames);
   const [names, setName] = useState(takenNames);
 
-  const { formRef, isFormValid, setIsFormValid } = useFormValidation(errors, formControls);
+  const {
+    formRef,
+    isFormValid,
+    setIsFormValid,
+    errors,
+    setErrors,
+  } = useFormValidation(initErrorMessages, formControls);
 
   useEffect(() => {
     if (takenNames) {
