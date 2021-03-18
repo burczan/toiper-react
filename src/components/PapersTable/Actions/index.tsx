@@ -14,9 +14,9 @@ export const Actions = ({ paper }: ActionsProps) => {
 
   return (
     <>
-      <Button color="primary" onClick={() => console.log('edit paper placeholder')}>
+      {/* <Button color="primary" onClick={() => console.log('edit paper placeholder')}>
         <Icon name="edit" />
-      </Button>
+      </Button> */}
       <Button color="danger" onClick={() => dispatch(removePaper(paper.id))}>
         <Icon name="trash" />
       </Button>
