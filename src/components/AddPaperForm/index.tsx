@@ -3,10 +3,7 @@ import { useDispatch } from 'react-redux';
 import { PaperTypes } from '../../state/papers/types';
 import { getTakenNames } from '../../state/papers/selectors';
 import { addPaper, AddPaperFormControls } from '../../state/papers/actionCreators';
-import {
-  validateInput,
-  CustomValidationRules,
-} from '../../common/components/Forms/helpers/validation';
+import { validateInput } from '../../common/components/Forms/helpers/validation';
 import { useFormValidation } from '../../common/components/Forms/helpers/useFormValidation';
 import { useTypedSelector } from '../../common/hooks';
 import {
@@ -17,9 +14,9 @@ import {
   PaperLeafs,
   PaperLength,
   SubmitButton,
-  FormControls,
   initFormControls,
   initErrorMessages,
+  customRules,
 } from './FormConfig';
 
 export const AddPaperForm = () => {
@@ -27,7 +24,7 @@ export const AddPaperForm = () => {
   const [formControls, setFormControls] = useState(initFormControls);
 
   const takenNames = useTypedSelector(getTakenNames);
-  const [names, setName] = useState(takenNames);
+  const [invalidNames, setInvalidName] = useState(takenNames);
 
   const {
     formRef,
@@ -39,7 +36,7 @@ export const AddPaperForm = () => {
 
   useEffect(() => {
     if (takenNames) {
-      setName(takenNames);
+      setInvalidName(takenNames);
     }
   }, [takenNames]);
 
@@ -50,49 +47,9 @@ export const AddPaperForm = () => {
   };
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormControls({
-      ...formControls,
-      [event.target.name]: event.target.value,
-    });
-
-    const customRules: CustomValidationRules<FormControls> = {
-      name: [
-        {
-          condition: event.target.value.length > 3,
-          errorMessage: 'Too long.',
-        },
-        {
-          condition: names.includes(event.target.value),
-          errorMessage: 'This name is already taken.',
-        },
-      ],
-      price: [
-        {
-          condition: event.target.valueAsNumber === 1,
-          errorMessage: 'Cannot be equal 1',
-        },
-      ],
-      leafs: [
-        {
-          condition: event.target.valueAsNumber === 2,
-          errorMessage: 'Cannot be equal 2',
-        },
-      ],
-      layers: [
-        {
-          condition: event.target.valueAsNumber === 3,
-          errorMessage: 'Cannot be equal 3',
-        },
-      ],
-      length: [
-        {
-          condition: event.target.valueAsNumber === 4,
-          errorMessage: 'Cannot be equal 4',
-        },
-      ],
-    };
-
-    const inputErrors = validateInput(event.target, customRules);
+    setFormControls({ ...formControls, [event.target.name]: event.target.value });
+    const rules = customRules(event.target, invalidNames);
+    const inputErrors = validateInput(event.target, rules);
     setErrors({ ...errors, ...inputErrors });
   };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PaperTypes } from '../../state/papers/types';
 import { FormButton, Input, Select } from '../../common/components/Forms';
-import { ErrorMessages } from '../../common/components/Forms/helpers/validation';
+import { CustomValidationRules, ErrorMessages } from '../../common/components/Forms/helpers/validation';
 
 type SelectProps = {
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -39,6 +39,45 @@ export const initErrorMessages: ErrorMessages<FormControls> = {
   leafs: '',
   type: '',
   length: '',
+};
+
+export const customRules = (target: EventTarget & HTMLInputElement, invalidNames: string[]) => {
+  return {
+    name: [
+      {
+        condition: target.value.length > 3,
+        errorMessage: 'Too long.',
+      },
+      {
+        condition: invalidNames.includes(target.value),
+        errorMessage: 'This name is already taken.',
+      },
+    ],
+    price: [
+      {
+        condition: target.valueAsNumber === 1,
+        errorMessage: 'Cannot be equal 1',
+      },
+    ],
+    leafs: [
+      {
+        condition: target.valueAsNumber === 2,
+        errorMessage: 'Cannot be equal 2',
+      },
+    ],
+    layers: [
+      {
+        condition: target.valueAsNumber === 3,
+        errorMessage: 'Cannot be equal 3',
+      },
+    ],
+    length: [
+      {
+        condition: target.valueAsNumber === 4,
+        errorMessage: 'Cannot be equal 4',
+      },
+    ],
+  } as CustomValidationRules<FormControls>;
 };
 
 export const PaperType = ({ onChange, value }: SelectProps) => {
