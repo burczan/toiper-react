@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { PaperTypes } from '../../state/papers/types';
 import { getTakenNames } from '../../state/papers/selectors';
 import { addPaper, AddPaperFormControls } from '../../state/papers/actionCreators';
 import {
   validateInput,
-  hasError,
   ErrorMessages,
   CustomValidationRules,
 } from '../../common/components/Forms/helpers/validation';
+import { useFormValidation } from '../../common/components/Forms/helpers/useFormValidation';
 import { useTypedSelector } from '../../common/hooks';
 import {
   PaperType,
@@ -41,32 +41,25 @@ const initErrorMessages: ErrorMessages<FormControls> = {
 
 export const AddPaperForm = () => {
   const dispatch = useDispatch();
-  const formRef = useRef<HTMLFormElement>(null);
   const [formControls, setFormControls] = useState(initFormControls);
   const [errors, setErrors] = useState(initErrorMessages);
-  const [isFormValid, setIsFormValid] = useState(false);
 
   const takenNames = useTypedSelector(getTakenNames);
   const [names, setName] = useState(takenNames);
 
-  useEffect(() => {
-    if (formRef.current?.checkValidity()) {
-      setIsFormValid(true);
-    }
-  }, [formControls]);
-
-  useEffect(() => {
-    const error = hasError(errors);
-    if (error) {
-      setIsFormValid(false);
-    }
-  }, [errors]);
+  const { formRef, isFormValid, setIsFormValid } = useFormValidation(errors, formControls);
 
   useEffect(() => {
     if (takenNames) {
       setName(takenNames);
     }
   }, [takenNames]);
+
+  const resetForm = () => {
+    setFormControls(initFormControls);
+    setErrors(initErrorMessages);
+    setIsFormValid(false);
+  };
 
   const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormControls({
@@ -132,9 +125,7 @@ export const AddPaperForm = () => {
         length: Number(formControls.length),
       };
       dispatch(addPaper(paper));
-      setFormControls(initFormControls);
-      setErrors(initErrorMessages);
-      setIsFormValid(false);
+      resetForm();
     }
   };
 
