@@ -77,11 +77,31 @@ export const AddPaperForm = () => {
     <>
       <form ref={formRef} onSubmit={onSubmit} noValidate>
         <PaperType value={formControls.type} onChange={onSelect} />
-        <PaperName value={formControls.name} onChange={onInputChange} error={errors.name ?? undefined} />
-        <PaperPrice value={formControls.price} onChange={onInputChange} error={errors.price ?? undefined} />
-        <PaperLayers value={formControls.layers} onChange={onInputChange} error={errors.layers ?? undefined} />
-        <PaperLeafs value={formControls.leafs} onChange={onInputChange} error={errors.leafs ?? undefined} />
-        <PaperLength value={formControls.length} onChange={onInputChange} error={errors.length ?? undefined} />
+        <PaperName
+          value={formControls.name}
+          onChange={onInputChange}
+          error={errors.name ?? undefined}
+        />
+        <PaperPrice
+          value={formControls.price}
+          onChange={onInputChange}
+          error={errors.price ?? undefined}
+        />
+        <PaperLayers
+          value={formControls.layers}
+          onChange={onInputChange}
+          error={errors.layers ?? undefined}
+        />
+        <PaperLeafs
+          value={formControls.leafs}
+          onChange={onInputChange}
+          error={errors.leafs ?? undefined}
+        />
+        <PaperLength
+          value={formControls.length}
+          onChange={onInputChange}
+          error={errors.length ?? undefined}
+        />
 
         <SubmitButton text="Add paper" disabled={!isFormValid} />
       </form>
