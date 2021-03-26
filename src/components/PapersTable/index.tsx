@@ -40,6 +40,11 @@ export const PapersTable = () => {
       sortable: true,
     },
     {
+      key: 'layerPrice',
+      label: 'Price of 1 layer',
+      sortable: true,
+    },
+    {
       key: 'actions',
       label: 'Actions',
     },
