@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-commented-out-tests */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -15,6 +14,9 @@ describe('<Input />', () => {
       <Input
         value={value}
         onChange={onChange}
+        htmlFor="banana"
+        name="banana"
+        type="text"
       />,
     );
     expect(screen.getByDisplayValue(value)).toHaveValue(value);
@@ -27,6 +29,9 @@ describe('<Input />', () => {
       <Input
         value={value}
         onChange={onChange}
+        htmlFor="banana"
+        name="banana"
+        type="text"
       />,
     );
     userEvent.type(screen.getByDisplayValue(value), newValue);
@@ -41,6 +46,9 @@ describe('<Input />', () => {
         value={value}
         onChange={onChange}
         autofocus
+        htmlFor="banana"
+        name="banana"
+        type="text"
       />,
     );
     userEvent.type(screen.getByDisplayValue(value), newValue, { skipClick: true });
@@ -55,50 +63,11 @@ describe('<Input />', () => {
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        htmlFor="banana"
+        name="banana"
+        type="text"
       />,
     );
     expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument();
   });
 });
-
-// it('Calls onChange on input value change.', () => {
-//   const value = 'Tonik';
-//   const mockOnClick = jest.fn();
-//   const { getByDisplayValue } = render(
-//     <Input
-//       value={value}
-//       onChange={mockOnClick}
-//     />,
-//   );
-//   fireEvent.change(getByDisplayValue(value), { target: { value: 'React' } });
-//   expect(mockOnClick).toHaveBeenCalled();
-// });
-
-// describe('<Input />', () => {
-//   it('renders without crashing', () => {
-//     const onChangeMock = jest.fn();
-//     render(
-//       <Input
-//         type={type}
-//         name={name}
-//         onChange={onChangeMock}
-//         value={value}
-//       />,
-//     );
-//     expect(screen.getByDisplayValue(value)).toBeInTheDocument();
-//   });
-
-//   it('calls onChange when input value changes', () => {
-//     const onChangeMock = jest.fn();
-//     render(
-//       <Input
-//         type={type}
-//         name={name}
-//         onChange={onChangeMock}
-//         value={value}
-//       />,
-//     );
-//     userEvent.type(screen.getByDisplayValue(value), 'ex');
-//     expect(onChangeMock).toHaveBeenCalledTimes(2);
-//   });
-// });
