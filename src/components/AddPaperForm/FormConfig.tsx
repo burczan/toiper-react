@@ -1,7 +1,7 @@
 import React from 'react';
 import { PaperTypes } from '../../state/papers/types';
 import { FormButton, Input, Select } from '../../common/components/Forms';
-import { CustomValidationRules, ErrorMessages } from '../../common/components/Forms/helpers/validation';
+import { CustomValidationRules, ErrorMessages } from '../../common/helpers/form/validation';
 
 type SelectProps = {
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -190,7 +190,7 @@ export const PaperLength = ({ value, onChange, error }: InputProps) => {
 
 export const SubmitButton = ({ disabled, text }: { disabled: boolean, text: string }) => {
   return (
-    <FormButton type="submit" color="primary" horizontal disabled={disabled}>
+    <FormButton type="submit" color="is-primary" horizontal disabled={disabled}>
       {text}
     </FormButton>
   );

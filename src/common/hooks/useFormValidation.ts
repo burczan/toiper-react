@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { hasError } from '../components/Forms/helpers/validation';
-import { SetState, Ref } from '../utils/types';
+import { hasError } from '../helpers/form/validation';
+import { SetState, Ref } from '../helpers/utils/types';
 
 type ValidationConfig<ErrorMessages> = {
   formRef: Ref<HTMLFormElement>;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Color } from '../../types';
+import { Color } from '../../bulmaTypes';
 
 type HelpProps = {
   color: Color;
@@ -8,6 +8,6 @@ type HelpProps = {
 
 export const Help = ({ color, children }: HelpProps) => {
   return (
-    <p className={`help is-${color}`}>{children}</p>
+    <p className={`help ${color}`}>{children}</p>
   );
 };

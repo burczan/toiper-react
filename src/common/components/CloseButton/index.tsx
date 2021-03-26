@@ -1,6 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
-import { Size } from '../types';
+import { Size } from '../bulmaTypes';
 
 type CloseButtonProps = {
   onClick?: () => void;

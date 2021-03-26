@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { PaperTypes } from '../../state/papers/types';
 import { getTakenNames } from '../../state/papers/selectors';
 import { addPaper, AddPaperFormControls } from '../../state/papers/actionCreators';
-import { validateInput } from '../../common/components/Forms/helpers/validation';
+import { validateInput } from '../../common/helpers/form/validation';
 import { useTypedSelector, useFormValidation } from '../../common/hooks';
 import {
   PaperType,

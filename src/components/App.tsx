@@ -13,7 +13,7 @@ export const App = () => {
       <Hero
         title="TOIPER"
         subtitle="Compare price of toilet paper rolls depending on amount of layers and leafs"
-        color="primary"
+        color="is-primary"
       />
       <div className="container">
         <div className="section container" style={{ maxWidth: `${window.innerWidth / 2}px` }}>

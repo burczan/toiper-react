@@ -73,7 +73,7 @@ export const Input = ({
         step={step}
         disabled={disabled}
       />
-      {helperText && <Help color="danger">{helperText}</Help>}
+      {helperText && <Help color="is-danger">{helperText}</Help>}
     </div>
   );
 

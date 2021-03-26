@@ -1,4 +1,4 @@
-import { typedBoolean } from '../../../utils/types';
+import { typedBoolean } from '../utils/types';
 
 export type ErrorMessages<FormControls> = {
   [InputName in keyof FormControls]: string;
